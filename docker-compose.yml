@@ -1,0 +1,12 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: postgres_tp2
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: catalogo
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
