@@ -26,7 +26,9 @@ Para llevar a cabo dicha entrega, tuvimos que contar con las siguientes herramie
 
 Testing: 
   Para la ejecución de pruebas de integración se levanta un contenedor PostgreSQL en segundo plano, genera el código con sqlc, ejecuta las pruebas unitarias e integrales sobre la base de datos y finalmente limpia el entorno de contenedores.
+  
   Para poder realizar el testeo abrimos la terminal desde la raiz del proyecto y utilizamos el comando: sudo make test
+  
   Para verificar la correcta ejecución el sistema realiza los siguientes pasos mostrandolos por la terminal:
     1. Limpieza previa:apaga y elimina contenedores/volúmenes antiguos (docker compose down -v).
     2. Generación de código:mapea schema.sql y queries.sql a código nativo en Go usando sqlc generate.
