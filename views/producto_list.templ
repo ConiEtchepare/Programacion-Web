@@ -1,0 +1,47 @@
+package views
+
+import (
+	"fmt"
+	"catalogo-LoDeKiki/internal/db"
+	"github.com/jackc/pgx/v5/pgtype"
+)
+
+// Mantenemos la función para formatear el precio numérico
+func formatPrecio(n pgtype.Numeric) string {
+	if !n.Valid {
+		return "0.00"
+	}
+	val, err := n.Value()
+	if err != nil || val == nil {
+		return "0.00"
+	}
+	return fmt.Sprintf("%v", val)
+}
+
+templ ProductoList(productos []db.Producto) {
+	<h2>Catálogo Actual</h2>
+	if len(productos) == 0 {
+		<p class="empty-msg">No hay productos registrados en el catálogo.</p>
+	} else {
+		<table class="table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>Categoría</th>
+					<th>Precio</th>
+				</tr>
+			</thead>
+			<tbody>
+				for _, p := range productos {
+					<tr>
+						<td>{ fmt.Sprintf("%d", p.ID) }</td>
+						<td>{ p.Nombre }</td>
+						<td>{ p.Categoria }</td>
+						<td>{ fmt.Sprintf("$%s", formatPrecio(p.Precio)) }</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+}

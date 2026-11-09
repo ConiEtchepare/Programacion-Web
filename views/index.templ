@@ -1,0 +1,35 @@
+package views
+
+import "catalogo-LoDeKiki/internal/db"
+
+templ IndexPage(productos []db.Producto) {
+	@Layout("Dietética Lo De Kiki") {
+		<!-- Formulario de creación (Tarjeta Izquierda) -->
+		<section class="card">
+			<h2>Agregar Producto</h2>
+			<form action="/productos" method="POST" id="producto-form">
+				<div class="form-group">
+					<label for="nombre">Nombre del Producto:</label>
+					<input type="text" id="nombre" name="nombre" placeholder="Ej: Castañas de Cajú W4" required/>
+				</div>
+
+				<div class="form-group">
+					<label for="categoria">Categoría:</label>
+					<input type="text" id="categoria" name="categoria" placeholder="Ej: Frutos Secos" required/>
+				</div>
+
+				<div class="form-group">
+					<label for="precio">Precio ($):</label>
+					<input type="number" id="precio" name="precio" step="0.01" placeholder="Ej: 12500.50" required/>
+				</div>
+
+				<button type="submit" class="btn-primary">Guardar Producto</button>
+			</form>
+		</section>
+
+		<!-- Contenedor de lista de productos (Tarjeta Derecha) -->
+		<section class="card">
+			@ProductoList(productos)
+		</section>
+	}
+}
